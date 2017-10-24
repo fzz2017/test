@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        #imgList{
+            padding: 10px;
+            list-style: none;
+        }
+
+        #imgList li{
+            padding: 10px;
+            width: 500px;
+            height: 100px;
+            border-bottom: 1px solid slateblue ;
+        }
+
+        #imgList li img{
+            margin: auto 10px;
+            width: 100px;
+            height: 100px;
+            float: left;
+        }
+
+        #imgList li div{
+
+        }
+
+
+    </style>
+</head>
+
+<body>
+<!--<div id="box">
+    <img trueimg="img/1.jpg" src="img/default.jpg"/>
+</div>-->
+
+
+<ul id="imgList"></ul>
+<script src="utils.js"></script>
+
+<script type="text/javascript">
+    var data;
+    var ajax = new XMLHttpRequest();
+    ajax.open('get', 'img/newList.json', false);
+    ajax.onreadystatechange = function(){
+        if(ajax.readyState === 4 && /^2\d{2}/.test(ajax.status)){
+            data = utils.toJSON(ajax.responseText);
+        }
+    };
+    ajax.send(null);
+
+    bindData();
+
+    function bindData(){
+        var str = '';
+        for(var i=0; i< data.length;i++){
+
+            str += `<li>
+                        <img src="img/default.jpg" trueImg="${data[i].img}">
+                        <div>
+                            <h3>${data[i].title}</h3>
+                            <p>${data[i].desc}</p>
+                        </div>
+                     </li>`;
+        }
+
+        var obox = document.getElementById('imgList');
+        obox.innerHTML = str;
+
+    }
+
+    var imgList = document.getElementById('imgList').getElementsByTagName('img');
+
+    function delayImg(){
+        for(var i=0;i<imgList.length;i++){
+            delayImgCode(i);
+        }
+    }
+
+    function delayImgCode(i){
+        var cur = imgList[i];
+        if(cur.load == true) return;//如果图片已经加载一次不需要重复加载
+
+        var curT = utils.offset(cur).top;
+        var curH = utils.offset(cur).height;
+
+        var winH = document.documentElement.clientHeight || document.body.clientHeight;
+
+        var winT = utils.win('scrollTop');
+
+        if(winT + winH >= curT){
+
+            var img = document.createElement('img');
+            img.src = cur.getAttribute('trueImg');
+            img.onload = function(){
+                cur.src = cur.getAttribute('trueImg');
+                cur.load = true;
+            }
+        }
+    }
+
+    window.onscroll = function(){
+        delayImg();
+    }
+
+/*
+    window.onscroll = function(){
+
+        var img = document.getElementsByTagName('img')[0];
+        var trueImg = img.getAttribute('trueimg');
+
+        //获取当前可视窗口的高度和宽度
+        var winHeight = document.documentElement.clientHeight || document.body.clientHeight;
+
+        //获取滚动条卷去的高度
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+        //获取当前元素距离body的offsetTop值
+        var top = img.offsetTop();
+
+
+        if(winHeight + scrollTop > top){
+            //创建一个图片元素，并把真正的SRC地址赋值给SRC，当该元素去加载图片成功的时候去把真正的地址赋值给要操作元素的src属性
+            var oImg = document.createElement('img');
+            oImg.src = trueImg;
+            oImg.onload = function(){
+                img.src = trueImg;
+            }
+        }
+
+
+        //创建一个img元素，附值图片的地址，如果图片可以找到，将实际的图片地址赋值给src属性
+       // var oimg = document.createElement('img');
+       /// oimg.src = '图片地址';
+
+       /// oimg.onload = function() {
+        ///    this.src = '图片地址';
+       //// }
+    }
+*/
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    function sum(num){
+        if(num == 1){
+            return 1;
+        }
+
+        if(num%3 !== 0){
+            return num+sum(num - 1);
+        }else{
+            return sum(num - 1);
+        }
+    }
+    var m = sum(100);
+    console.log(m);
+</script>
+</body>
+</html>

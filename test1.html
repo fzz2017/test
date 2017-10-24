@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    /*function Fn(num){
+        this.x = this.y = num;
+    }
+    Fn.prototype = {
+        x:20,
+        sum: function(){
+            console.log(this.x + this.y);
+        }
+    };
+    var f = new Fn(10);
+    console.log(f.sum === Fn.prototype.sum);
+    f.sum();
+    Fn.prototype.sum();
+    console.log(f.constructor);*/
+
+
+    function p(){
+        //arguments转换成数组并排序
+        [].sort.call(arguments, function(a,b){return a-b;});
+        console.log(arguments);
+    }
+
+    p(1,8,9,5,6,7,10,2,3,4);
+
+
+</script>
+</body>
+</html>

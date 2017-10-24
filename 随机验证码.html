@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    function code(){
+        var str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var str1 = '';
+        var i=0;
+        while(i < 4){
+            debugger;
+            str1 += str[Math.round(Math.random()*(str.length))];
+            i++;
+        }
+        return str1;
+    }
+    var f = code();
+    f.log();
+</script;>
+</body>
+</html>

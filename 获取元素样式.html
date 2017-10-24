@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        body{
+            background-color: gray;
+        }
+        #box{
+            width:300px;
+            height:500px;
+            border: 1px solid mediumvioletred;
+            background-color: rebeccapurple;
+            opacity: 0.3;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    aiehgoegojejojgojegeg
+
+</div>
+
+<script type="text/javascript">
+    function getcss(cur, attr) {
+        //var str = window.getComputedStyle ? 'window.getComputedStyle(' + cur + ').' + attr : cur + '.currentStyle.' + attr;
+        //debugger;
+
+        if (window.getComputedStyle) {
+            return window.getComputedStyle(cur)[attr];
+        } else {
+
+            if (attr == 'opacity') {
+                var reg = /\d+(?:\.(\d+))?/g;
+                var a = reg.test(cur.currentStyle.filter);
+debugger;
+                if(a){
+                    var m = reg.exec(cur.currentStyle.filter);
+                    return m[0];
+                }else{
+                    return null;
+                }
+            }else{
+
+            return cur['currentStyle'][attr];}
+       }
+        ///return window.getComputedStyle ? window.getComputedStyle(cur)[attr] : cur['currentStyle'][attr];
+    }
+
+    console.log(getcss(document.getElementById('box'), 'opacity'));
+</script>
+</body>
+</html>

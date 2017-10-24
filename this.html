@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    var nume = 2;
+    var obj = {
+        num : 0,
+        fn : function(){
+            num = 1;
+            (function(num){
+                ++this.num;
+                num++;
+                console.log(num);
+            })(this.num);
+        }
+    }
+    var f = obj.fn;
+    f();
+    console.log(window.num, obj.num);
+</script>
+
+</body>
+</html>

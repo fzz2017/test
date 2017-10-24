@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选项卡</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        #tab{
+            width:500px;
+            height:400px;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+
+
+        #tab ul li{
+            text-align: center;
+            padding: 5px;
+            width:80px;
+            height:40px;
+            line-height: 40px;
+            list-style:none;
+            float: left;
+        }
+
+
+        #tab div{
+            text-align: center;
+            padding: 10px;
+            width:500px;
+            height:400px;
+            background-color: antiquewhite;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+<div id="tab">
+    <ul>
+        <li>书</li>
+        <li>画</li>
+        <li>棋</li>
+    </ul>
+    <div>在路上</div>
+    <div>齐白石</div>
+    <div>围棋</div>
+</div>
+<script type="text/javascript">
+    var lis = document.getElementsByTagName('li');
+    var divs = document.getElementById('tab').getElementsByTagName('div');
+    for(var i=0;i<lis.length;i++){
+        lis[i].index = i;
+        lis[i].onclick = function(){
+            for(var j=0;j<lis.length;j++){
+                (lis[j]).style.backgroundColor = '';
+                divs[j].style.display = 'none';
+            }
+            divs[this.index].style.display = 'block';
+            this.style.backgroundColor = 'blue';
+        }
+    }
+
+    //任意数求和
+    function sum() {
+        var total = 0;
+        for(var i=0; i < arguments.length; i++) {
+            var one = Number(arguments[i]);
+            if (isNaN(one)) {
+                continue;
+            } else {
+                total += one;
+            }
+        }
+        return total;
+
+    }
+     //console.log(sum(10,1,'1px',''));
+
+
+    var m = [10,4,78,29,5,3,0];
+    for(var i=0;i<m.length;i++){
+        //var flag = true;
+        for(var j = i+1;j<m.length-i;j++){
+           // console.log(1);
+
+            var tmp = null;
+            if(m[i] > m[j]){
+                tmp = m[i];
+                m[i] = m[j];
+                m[j] = tmp;
+               // flag = false;
+            }
+        }
+        //if(flag){break;}
+    }
+    //console.log(m);
+
+    //冒泡排序法
+    var ary = [12,45,2,5,90,1,44,33,22];
+    for(var i=0;i<ary.length;i++){
+        //var flag = true;
+        //console.log(1);
+        for(var j = 0;j<ary.length-1-i;j++){
+            var temp = null;
+            if(ary[j] > ary[j+1]){
+                temp = ary[j];
+                ary[j] = ary[j + 1];
+                ary [j+1] = temp;
+               // flag = false;
+            }
+        }
+    }
+   // console.log(ary);
+
+    //插入排序法
+    var ary = [12,45,2,5,90,1,44,33,22];
+    var ary1 = [];
+    ary1.push(ary[0]);
+    for(var i=0;i<ary.length;i++){
+        var cur = ary[i];
+        for(var j=ary1.length-1; j>=0;){
+            if(ary1[j] < cur){
+                ary1.splice(j + 1, 0, cur);
+                break;
+            }else{
+                j--;
+                if(j === -1){
+                    ary1.unshift(cur);
+                }
+            }
+        }
+    }
+    console.log(ary1);
+</body>
+</html>

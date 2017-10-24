@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #outer{
+            position: relative;
+            margin: 20px auto;
+            width: 300px;
+            height: 1500px;
+            background-color: magenta;
+        }
+
+        #inner{
+            margin: 20px auto;
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+        }
+        #center{
+            margin:20px auto;
+            width:100px;
+            height:100px;
+            background-color: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+<div id="outer">
+    <div id="inner">
+        <div id="center">
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var outer = document.getElementById('outer');
+    var inner = document.getElementById('inner');
+    var center = document.getElementById('center');
+
+    function offsetLeft(ele){
+        var l = ele.offsetLeft;
+        var t = ele.offsetTop;
+        var p = ele.offsetParent;
+        console.log(p);
+
+        while(p){
+            //ie8.0加上父级参照物的边框
+            //
+            //if() {
+                l += p.clientLeft;
+                t += p.clientTop;
+           // }
+            //其它浏览器攻取父级参照物的偏移量
+            l += p.offsetLeft;
+            t += p.offsetTop;
+            //改变父级参照物为当前元素，以便向上一级寻找父级参照物，直到找到body
+            p = p.offsetParent;
+        }
+
+
+    }
+
+    offsetLeft(inner);
+
+    document.documentElement.scrollTop = 600;
+
+    var top = document.body.scrollTop || document.documentElement.scrollTop;
+    console.log(top);
+
+
+    function setScroll(ele, val){
+        //特殊情况处理
+
+        if(ele && !val){
+            //return ele['scrollTop'];
+            return document.documentElementp[ele] || document.body[ele];
+        }
+        document.documentElement[ele] = val;
+        document.body[ele] = val;
+    }
+    setScroll(outer, 500);
+
+
+    console.log(setScroll(outer));
+    //设置滚动条的位置
+    点击回到顶部元素让页面回到0
+    多少秒内回到顶部
+
+
+</script>
+</body>
+</html>
